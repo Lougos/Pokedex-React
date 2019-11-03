@@ -7,7 +7,7 @@ import Loader from './Loader';
 class List extends React.Component {
 
     state = {
-        url: 'https://pokeapi.co/api/v2/pokemon/',
+        url: 'https://pokeapi.co/api/v2/pokemon?limit=802',
         pokemon: null
     };
 
