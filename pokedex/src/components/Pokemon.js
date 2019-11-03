@@ -3,7 +3,36 @@ import axios from 'axios';
 import '../App.css';
 import './Pokemon.css';
 
+import hp from './../img/health.png';
+import atk from './../img/swords.png';
+import def from './../img/shield.png';
+import speed from './../img/running.png';
+import speAtk from './../img/book.png';
+import speDef from './../img/protection.png';
+
+const Type_Couleurs = {
+    bug: 'B1C12E',
+    dark: '4F3A2D',
+    dragon: '755EDF',
+    electric: 'FCBC17',
+    fairy: 'F4B1F4',
+    fighting: '823551D',
+    fire: 'E73B0C',
+    flying: 'A3B3F7',
+    ghost: '6060B2',
+    grass: '74C236',
+    ground: 'D3B357',
+    ice: 'A3E7FD',
+    normal: 'C8C4BC',
+    poison: '934594',
+    psychic: 'ED4882',
+    rock: 'B9A156',
+    steel: 'B5B5C3',
+    water: '3295F6'
+  };
+
 class Pokemon extends React.Component {
+
 
     state = {
         name: '',
@@ -84,15 +113,14 @@ class Pokemon extends React.Component {
         }});
 
         const height = 
-            Math.round(pokemonRes.data.height * 0,1); // passer de décimètre a mètre
+            Math.round(pokemonRes.data.height * 10); // passer de décimètre a centimètre
         this.setState({height});
 
         const weight =
-            Math.round(pokemonRes.data.weight * 0,1); // passer de hectogramme à kilogramme
+            Math.round(pokemonRes.data.weight * 100); // passer de hectogramme à gramme
         this.setState({weight});
     
-        const types = pokemonRes.data.types.map(type => type.type.name.toLowerCase().split(' ').map(s => s.charAt(0).toUpperCase() + s.substring(1))
-        .join(' '));
+        const types = pokemonRes.data.types.map(type => type.type.name);
         this.setState({types});
 
         await axios.get(pokemonSpeciesURL).then(res => {
@@ -116,8 +144,27 @@ class Pokemon extends React.Component {
                     <div className="card">
                         <div className="card-header align-items-center">
                             <div className="row justify-content-around">
-                            <h5>{this.state.name}</h5>
-                            <div><h5>{this.state.types}</h5></div>
+                                <h5>{this.state.name.toLocaleLowerCase() // mettre en minuscule
+                                                    .split(" ") // Si il ya deux noms les split
+                                                    .map(letter => letter.charAt(0).toLocaleUpperCase() + letter.substring(1)) // Première lettre de chaque nom en majuscule
+                                                    .join(" ")}</h5>
+                                <div>
+                                    {this.state.types.map(type => (
+                                    <span
+                                        key={type}
+                                        className="badge badge-pill mr-1"
+                                        style={{
+                                        backgroundColor: `#${Type_Couleurs[type]}`,
+                                        color: 'white'
+                                        }}>
+                                        {type
+                                        .toLowerCase()
+                                        .split(' ')
+                                        .map(s => s.charAt(0).toUpperCase() + s.substring(1))
+                                        .join(' ')}
+                                    </span>
+                                    ))}
+                                </div>
                             </div>
                         </div>
                         <div className="card-body">
@@ -125,14 +172,37 @@ class Pokemon extends React.Component {
                                 <div>
                                     <img src={this.state.imageUrl}></img>
                                 </div>
-                                <div className>
-
-                                </div>
+                                    <div>
+                                        <div>
+                                            <div className='info row align-items-center'>
+                                                <img src={hp} alt='Vie' className='stats_icon'/><p>{this.state.stats.hp}</p>
+                                                <img src={speed} alt='Vitesse' className='stats_icon'/><p>{this.state.stats.speed}</p>
+                                            </div>
+                                            <div className='info row align-items-center'>
+                                                <img src={atk} alt='Attaque' className='stats_icon'/><p>{this.state.stats.attack}</p>
+                                                <img src={def} alt='Défense' className='stats_icon'/><p>{this.state.stats.defense}</p>
+                                            </div>
+                                            <div className='info row align-items-center'>
+                                                <img src={speAtk} alt='Attaque Spécial' className='stats_icon'/><p>{this.state.stats.specialAttack}</p>
+                                                <img src={speDef} alt='Défense Spécial' className='stats_icon'/><p>{this.state.stats.specialDefense}</p>
+                                            </div>
+                                        </div>
+                                    </div>
                                 <div>
                                     <img src={this.state.imageUrlShiny}></img>
                                 </div>
                             </div>
-
+                            <div className="col">
+                                <div className="row justify-content-center">
+                                    Taille :<p>{this.state.height}</p>cm
+                                </div>
+                                <div className="row justify-content-center">
+                                    Poids :<p>{this.state.weight}</p>gramme
+                                </div>
+                                <div className="row justify-content-center">
+                                    Description :<p>{this.state.description}</p>
+                                </div>
+                            </div>
                         </div>
                     </div>   
             </div>

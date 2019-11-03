@@ -3,7 +3,6 @@ import logo from '../logo.svg';
 import '../App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import Navbar from "../components/Navbar";
 import List from '../components/List';
 import Form from "../components/Form";
 import Loader from "../components/Loader";
@@ -30,13 +29,20 @@ class AffichagePokedex extends React.Component {
         //);
 
         return (
-            <div>
+          <>
+            <div className="row justify-content-center">
+              <h1>Welcome to my Pokedex</h1>
+            </div>
+            <div className="row justify-content-center">
             <Form //handleSubmit={this.handleSubmit} value={value} 
             />
+            </div>
+            <div>
             <Loader/> 
             <List //data={filteredPokemons}
             /> 
             </div>
+          </>
         );
     }
 }

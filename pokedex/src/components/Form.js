@@ -5,7 +5,7 @@ const Form = ({ handleSubmit, value }) =>  (
         <>
         <form onSubmit={handleSubmit}>
           <label htmlFor="Filtrer"></label>
-            Nom du Pokemon<br/>
+            <p className="row justify-content-center">Nom du Pokemon</p>
             <input 
              key="filter"
              pokemon="text"

@@ -1,5 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
+import '../App.css'
 
 import styled from 'styled-components';
 
@@ -33,7 +34,7 @@ class PokemonCase extends React.Component {
         return (
             <div className="col-md-3 col-sm6 mb-5">
                 <Link to={`pokemon/${this.state.pokemonIndex}`}>
-                <div className="card">
+                <div className="card main">
                     <h6 className="card-header">{this.state.pokemonIndex}</h6>
                     <Sprite className="card-img-top rounded mx-auto mt-2"
                         src={this.state.imageUrl}/>
