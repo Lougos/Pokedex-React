@@ -9,24 +9,29 @@ import Loader from "../components/Loader";
 
 class AffichagePokedex extends React.Component {
   
- /* state = {
-      value: '',
+  state = {
+    value: this.props.recherche,
+    isLoading: true,
+    data: [],
+    filteredPokemons: [],
+    search: this.props.recherche
   };
+
+  handleSubmit = this.handleSubmit.bind(this)
   
-  handleSubmit = this.handleSubmit.bind(this);
+    handleSubmit(ev){
+        ev.preventDefault();
+        this.setState({
+            value: new FormData(ev.currentTarget).get('filter'),
 
-  handleSubmit(ev) {
-    ev.preventDefault();
-    this.setState({
-      value: new FormData(ev.currentTarget).get('filter'),
-    });
-
-  } */
+        });
+      }
 
     render () {
 
-        //const filteredPokemons = data.pokemon.filter(pokemon => pokemon.name.toLowerCase().includes(this.state.value.toLowerCase()),
-        //);
+        const {isLoading,data} = this.state;
+        let {filteredPokemons,search,value} = this.state;
+        filteredPokemons=[];
 
         return (
           <>
@@ -34,11 +39,12 @@ class AffichagePokedex extends React.Component {
               <h1>Welcome to my Pokedex</h1>
             </div>
             <div className="row justify-content-center">
-            <Form //handleSubmit={this.handleSubmit} value={value} 
-            />
+            <Form/>
             </div>
             <div>
-            <Loader/> 
+              <hr></hr>
+            </div>
+            <div>
             <List //data={filteredPokemons}
             /> 
             </div>

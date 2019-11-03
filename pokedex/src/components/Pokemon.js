@@ -59,7 +59,6 @@ class Pokemon extends React.Component {
         const { pokemonIndex } = this.props.match.params;
 
         const pokemonUrl = `https://pokeapi.co/api/v2/pokemon/${pokemonIndex}/`;
-        const pokemonSpeciesURL = `https://pokeapi.co/api/v2/pokemon-species/${pokemonIndex}/`;
 
         const pokemonRes = await axios.get(pokemonUrl);
 
@@ -125,17 +124,6 @@ class Pokemon extends React.Component {
         const types = pokemonRes.data.types.map(type => type.type.name);
         this.setState({types});
 
-        await axios.get(pokemonSpeciesURL).then(res => {
-            let description = '';
-            res.data.flavor_text_entries.some(flavor => {
-              if (flavor.language.name === 'en') {
-                description = flavor.flavor_text;
-                return;
-              }
-            });
-
-            this.setState({description});
-            });
     }
     
 
@@ -201,9 +189,6 @@ class Pokemon extends React.Component {
                                 </div>
                                 <div className="row justify-content-center">
                                     Poids :<p>{this.state.weight}</p>gramme
-                                </div>
-                                <div className="row justify-content-center">
-                                    Description :<p>{this.state.description}</p>
                                 </div>
                             </div>
                         </div>

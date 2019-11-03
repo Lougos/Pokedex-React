@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Form = ({ handleSubmit, value }) =>  (
+const Form = ({ handleSubmit, value, search }) =>  (
 
         <>
         <form onSubmit={handleSubmit}>
@@ -8,12 +8,12 @@ const Form = ({ handleSubmit, value }) =>  (
             <p className="row justify-content-center">Nom du Pokemon</p>
             <input 
              key="filter"
-             pokemon="text"
-             url="filter"
+             type="text"
+             name="filter"
              />
           <input type="submit" value="Filtrer"/>
+          <a href={'/?search='+ value}>Filtrer </a>
         </form>
-        <p>{value}</p>
       </>
 );
 
