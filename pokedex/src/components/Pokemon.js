@@ -70,6 +70,8 @@ class Pokemon extends React.Component {
                 case 'special-defense':
                     specialDefense = stat['base_stat'];
                 break;
+                default:
+                break;
             }
         })
         this.setState({stats: {
@@ -89,7 +91,8 @@ class Pokemon extends React.Component {
             Math.round(pokemonRes.data.weight * 0,1); // passer de hectogramme à kilogramme
         this.setState({weight});
     
-        const types = pokemonRes.data.types.map(type => type.type.name);
+        const types = pokemonRes.data.types.map(type => type.type.name.toLowerCase().split(' ').map(s => s.charAt(0).toUpperCase() + s.substring(1))
+        .join(' '));
         this.setState({types});
 
         await axios.get(pokemonSpeciesURL).then(res => {
@@ -110,11 +113,28 @@ class Pokemon extends React.Component {
         return(
             <>
             <div className="col">
-                <div className="row align-center">   
-                <h2>{this.state.name}</h2>      
-                <img src={this.state.imageUrl}></img>
-                <img src={this.state.imageUrlShiny}></img>
-                </div>
+                    <div className="card">
+                        <div className="card-header align-items-center">
+                            <div className="row justify-content-around">
+                            <h5>{this.state.name}</h5>
+                            <div><h5>{this.state.types}</h5></div>
+                            </div>
+                        </div>
+                        <div className="card-body">
+                            <div className="row justify-content-between">
+                                <div>
+                                    <img src={this.state.imageUrl}></img>
+                                </div>
+                                <div className>
+
+                                </div>
+                                <div>
+                                    <img src={this.state.imageUrlShiny}></img>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>   
             </div>
             </>
         );
