@@ -7,3 +7,11 @@
   background-color: #ef5353;
   color: white;
 }
+
+.navbar a {
+  color: white;
+}
+
+.navbar a:hover {
+  color: blue;
+}

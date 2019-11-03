@@ -1,34 +1,24 @@
 import React from 'react';
-import { BrowserRouter as Router, Switch, Link, Route } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import './App.css';
 import AffichagePokedex from "./pages/affichagePokedex";
+import Pokemon from './components/Pokemon';
+import Navbar from './components/Navbar';
 
 class App extends React.Component {
 render () { 
   return (
     <Router>
-        <div>
-        <nav>
-          <ul>
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-            <li>
-              <Link to="/Pokedex">Pokedex</Link>
-            </li>
-          </ul>
-        </nav>
-
+        <div className="App">
+        <Navbar />
         <Switch>
-          <Route path="/Pokedex">
+          <Route exact path="/">
             <AffichagePokedex />
           </Route>
-          <Route path="/">
-            <h1>Home</h1>
-          </Route>
+          <Route exact path="/pokemon/:pokemonIndex" component={Pokemon} />
         </Switch>
       </div>
       </Router>

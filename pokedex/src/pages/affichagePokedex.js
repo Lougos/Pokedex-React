@@ -31,7 +31,6 @@ class AffichagePokedex extends React.Component {
 
         return (
             <div>
-            <Navbar />
             <Form //handleSubmit={this.handleSubmit} value={value} 
             />
             <Loader/> 
