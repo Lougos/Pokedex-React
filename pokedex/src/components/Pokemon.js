@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import '../App.css';
 import './Pokemon.css';
+import Loader from '../components/Loader'
 
 import hp from './../img/health.png';
 import atk from './../img/swords.png';
@@ -35,6 +36,7 @@ class Pokemon extends React.Component {
 
 
     state = {
+        isLoading: false,
         name: '',
         pokemonIndex: '',
         imageUrl: '',
@@ -138,6 +140,7 @@ class Pokemon extends React.Component {
     
 
     render() {
+        const { isLoading, imageUrlShiny, imageUrl } = this.state;
         return(
             <>
             <div className="col">
@@ -170,7 +173,7 @@ class Pokemon extends React.Component {
                         <div className="card-body">
                             <div className="row justify-content-between">
                                 <div>
-                                    <img src={this.state.imageUrl}></img>
+                                    { isLoading ? <Loader /> : <img src={this.state.imageUrl}></img> }
                                 </div>
                                     <div>
                                         <div>
@@ -189,7 +192,7 @@ class Pokemon extends React.Component {
                                         </div>
                                     </div>
                                 <div>
-                                    <img src={this.state.imageUrlShiny}></img>
+                                    { isLoading ? <Loader /> : <img src={this.state.imageUrlShiny}></img> }
                                 </div>
                             </div>
                             <div className="col">
